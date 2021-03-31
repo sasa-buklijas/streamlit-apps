@@ -31,7 +31,7 @@ with col1:
     st.write('You selected:', option)
 
 with col2:
-    amount = float(st.number_input('Input', 100, 10_000_000, 1_000_000, help='amount _ price'))
+    amount = float(st.number_input('Input', 1, 10_000_000, 1_000_000, help='amount _ price'))
     st.write(f'Your amount: {amount:_.0f} USDT')
 
 if st.button('Calculate'):
