@@ -285,7 +285,7 @@ if bc:
             btc_word = 'decrease'
 
         init_dollars = len(df)*10.0
-        st.markdown(f'In last {(datetime.date.today() - start_date).days} days since {start_date}, inital {init_dollars:,.2f}$ would be {(init_dollars*index_percent)/100:,.2f}$')
+        st.write(f'In last {(datetime.date.today() - start_date).days} days since {start_date}, inital {init_dollars:,.2f}$ would be {(init_dollars*(100+index_percent))/100:,.2f}$')
         st.write(f'Index {index_word} of {index_percent:.2f}%, Bitcoin {btc_word} of {btc_percent:.2f}%')
 
         import altair as alt
