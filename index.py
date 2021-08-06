@@ -120,6 +120,7 @@ if bc:
         'GBP',  # Great British Pound 
         'EUR',  # European Union
         'TRY',  # Turkish lira
+        'NGN',  # NGN is the legal tender of the Federal Republic of Nigeria. NGN is the currency code, not the digital currency code.
         
         'IDRT', # Rupiah Token (IDRT) is a stablecoin that is pegged at 1:1 ratio to the InDonesian Rupiah.
 
