@@ -77,6 +77,21 @@ if DEBUG:
     st.write('Takes only USDTsomething or somethingUSDT.')
     st.write(' - assets that are automaticaly removed will be displayed on screen')
 
+# /?date=20210724&debug=d
+default_date = datetime.date(2021, 1, 1)
+have_default_date = False
+DATE = get_options.get('date', None)
+if DATE:
+    print(f'{DATE=} {type(DATE)=}')
+    DATE = DATE[0]  # take first, because it is list
+    try:
+        default_date = datetime.datetime.strptime(DATE, "%Y%m%d").date()
+    except ValueError as e:
+        print(f'except ValueError: {e=}')
+        pass
+    else:
+        have_default_date = True
+   
 st.write('Only for Binance.')
 st.write('By: [buklijas.info](http://buklijas.info)')
 st.write('')
@@ -86,8 +101,8 @@ col1, col2 = st.beta_columns(2)
 with col1:
     start_date = st.date_input(
         label='Select start date',
-        value=datetime.date(2021, 1, 1),        # default value
-        min_value=datetime.date(2017, 1, 1),    # treba vidjeti kada je binance poceo
+        value=default_date,        # default value
+        min_value=datetime.date(2017, 8, 17),    # treba vidjeti kada je binance poceo
         max_value=datetime.date.today(),
         help='Select start date fromHelp')
     st.write('You selected:', start_date)
@@ -96,7 +111,7 @@ with col2:
     bc = st.button('Calculate')
         
         
-if bc:
+if bc or have_default_date:
     st.write('')
 
     r = requests.get('https://api.binance.com/api/v3/exchangeInfo')
