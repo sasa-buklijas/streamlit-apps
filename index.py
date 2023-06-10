@@ -96,7 +96,7 @@ st.write('Only for Binance.')
 st.write('By: [buklijas.info](http://buklijas.info)')
 st.write('')
 
-col1, col2 = st.beta_columns(2)
+col1, col2 = st.columns(2)
 
 with col1:
     start_date = st.date_input(
@@ -301,7 +301,7 @@ if bc or have_default_date:
             btc_word = 'decrease'
 
         init_dollars = len(df)*10.0
-        st.write(f'In last {(datetime.date.today() - start_date).days} days since {start_date}, inital {init_dollars:,.2f}$ would be {(init_dollars*(100+index_percent))/100:,.2f}$')
+        st.write(f'In last {(datetime.date.today() - start_date).days} days since {start_date}, initial {init_dollars:,.2f}\$ would be {(init_dollars*(100+index_percent))/100:,.2f}\$')
         st.write(f'Index {index_word} of {index_percent:.2f}%, Bitcoin {btc_word} of {btc_percent:.2f}%')
 
         import altair as alt
