@@ -146,7 +146,8 @@ if bc or have_default_date:
         'BIDR', # Binance IDR (BIDR) is a BEP2 stablecoin pegged 1:1 to the Indonesian Rupiah (IDR)
         
     }
-    number_of_symbols = len([s for s in exchange_info['symbols']])
+    print('exchange_info', exchange_info)
+    number_of_symbols = len([s for s in exchange_info["symbols"]])
     number_of_traded_symbols = len([s for s in exchange_info['symbols'] if s['status'] == 'TRADING'])
     number_of_non_traded_symbols = len([s for s in exchange_info['symbols'] if s['status'] != 'TRADING'])
     if number_of_traded_symbols + number_of_non_traded_symbols - number_of_symbols:
