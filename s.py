@@ -22,7 +22,7 @@ st.write('')
 
 if uploaded_file is not None:
     _ = uploaded_file.name.split('_')[0]
-    bundel_date = datetime.datetime.strptime(_, "%Y%m%d").date()
+    bundle_date = datetime.datetime.strptime(_, "%Y%m%d").date()
 
     df = pd.read_json(uploaded_file)
 
@@ -33,10 +33,10 @@ if uploaded_file is not None:
     for i in org_prices:
         symbol_price[i['symbol']] = float(i['price'])   
 
-    def get_last_price(x):
+    def get_current_price(x):
         return symbol_price[x]
 
-    df['last_price'] = df['symbol'].apply(get_last_price)
+    df['last_price'] = df['symbol'].apply(get_current_price)
     df['value'] = df['origQty'] * df['last_price']
     df['diff_$'] = df.value - df.cummulativeQuoteQty
     df['diff_%'] = (df.value / df.cummulativeQuoteQty) * 100 - 100
@@ -45,11 +45,14 @@ if uploaded_file is not None:
     now = sum(df.value)
     diff = now - org
     diff_p = (now / org) * 100 - 100
-    age_in_days = (datetime.date.today() - bundel_date).days
+    age_in_days = (datetime.date.today() - bundle_date).days
     # https://www.investopedia.com/terms/c/cagr.asp, Compound Annual Growth Rate 
-    cagr = (now / org) ** (1/(age_in_days/365))
+    if age_in_days != 0:    # if you are checking same day
+        cagr = (now / org) ** (1/(age_in_days/365))
+    else:
+        cagr = 0.0
 
-    st.write(f'From {bundel_date} in {org:.2f}, now {now:.2f} after {age_in_days} days --- diff {diff:.2f}$, {diff_p:.2f}%')
+    st.write(f'From {bundle_date} in {org:.2f}, now {now:.2f} after {age_in_days} days --- diff {diff:.2f}$, {diff_p:.2f}%')
     st.write(f'Compound Annual Growth Rate {cagr:.2f}%')
     
     number_of_assets = len(df)
